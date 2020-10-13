@@ -33,17 +33,17 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter{
 		registry.addViewController("/").setViewName("main");
 	}
 
-//	@Override
-//	public void configureViewResolvers(ViewResolverRegistry registry) {
-//		registry.jsp("/WEB-INF/views/jsp", ".jsp");
-//	}
+	@Override
+	public void configureViewResolvers(ViewResolverRegistry registry) {
+		registry.jsp("/WEB-INF/views/", ".jsp");
+	}
 	
-	@Bean
-    public InternalResourceViewResolver getInternalResourceViewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".jsp");
-        return resolver;
-    }
+//	@Bean
+//    public InternalResourceViewResolver getInternalResourceViewResolver() {
+//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//        resolver.setPrefix("/WEB-INF/views/");
+//        resolver.setSuffix(".jsp");
+//        return resolver;
+//    }
 	
 }
