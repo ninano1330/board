@@ -5,7 +5,7 @@ import java.util.Date;
 public class MemberDto {
 	private int memberNo;
 	private String memberId;
-	private String memberPwd;
+	private String memberPw;
 	private Date memberJoinDate;
 	private int memberGrade;
 	private String memberPhone;
@@ -23,11 +23,11 @@ public class MemberDto {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getMemberPwd() {
-		return memberPwd;
+	public String getMemberPw() {
+		return memberPw;
 	}
-	public void setMemberPwd(String memberPwd) {
-		this.memberPwd = memberPwd;
+	public void setMemberPw(String memberPwd) {
+		this.memberPw = memberPwd;
 	}
 	public Date getMemberJoinDate() {
 		return memberJoinDate;

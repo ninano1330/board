@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/board.do" method="get">
+<form action="boardWrite.do" method="post">
+	제목 : <input type="text" name="boardTitle"> <br>
+	내용 : <input type="text" name="boardContent"> <br>
 	<input type="submit" value="글쓰기" />
 </form>
 
