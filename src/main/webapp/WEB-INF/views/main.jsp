@@ -9,5 +9,6 @@
 </head>
 <body>
 <h1>HI</h1>
+<a href="${pageContext.request.contextPath}/board/form.do">글쓰기</a>
 </body>
 </html>

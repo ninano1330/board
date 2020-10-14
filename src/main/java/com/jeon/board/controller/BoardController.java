@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.jeon.board.dto.BoardDto;
 
 @Controller
+@RequestMapping("/board")
 public class BoardController {
 
 //	@RequestMapping(value="/post.*")
@@ -17,12 +18,12 @@ public class BoardController {
 //	@RequestMapping(value="/post")
 //	@RequestMapping(value={"/post", "/post/", "/post.*"})
 
-	@RequestMapping(value="/board.do", method=RequestMethod.GET)
+	@RequestMapping(value="/form.do", method=RequestMethod.GET)
 	public String boardForm() {
 		return "board/boardForm";		
 	}
 	
-	@RequestMapping(value="/boardWrite.do", method=RequestMethod.POST)
+	@RequestMapping(value="/write.do", method=RequestMethod.POST)
 	public String boardForm(BoardDto boardDto) {
 		System.out.println(boardDto.getBoardTitle());
 		System.out.println(boardDto.getBoardContent());
