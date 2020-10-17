@@ -22,6 +22,8 @@ public class LoginIntercepter extends HandlerInterceptorAdapter {
 		String requestURI = request.getRequestURI();
 		String servletPath = request.getServletPath();
 		
+		System.out.println("contextPath : " + contextPath);
+		
 		if(chkExcludeMappingPath(servletPath) == true) {
 			System.out.println("This " + servletPath + " path don't need to login.");
 			return true;
@@ -73,6 +75,8 @@ public class LoginIntercepter extends HandlerInterceptorAdapter {
 		HashSet<String> excludeMappingPath = new HashSet<String>();
 		excludeMappingPath.add("/login");
 		excludeMappingPath.add("/main");
+		excludeMappingPath.add("/boards");
+		
 		return excludeMappingPath;
 	}
 

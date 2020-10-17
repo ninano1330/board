@@ -10,7 +10,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.jeon.board.config.ApplicationConfig;
+import com.jeon.board.controller.BoardApiController;
 import com.jeon.board.dao.LoginDao;
+import com.jeon.board.dto.BoardDto;
 import com.jeon.board.dto.MemberDto;
 import com.jeon.board.service.LoginService;
 
@@ -42,6 +44,11 @@ public class Test {
 		LoginService loginService = ac.getBean(LoginService.class);
 		System.out.println(loginService);
 		System.out.println(loginService.getLogindao());
+		
+		
+		
+		BoardDto boardDto = new BoardDto();
+		System.out.println(boardDto.getBoardNo());
 		
 	}
 

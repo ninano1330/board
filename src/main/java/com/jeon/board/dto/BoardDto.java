@@ -9,7 +9,14 @@ public class BoardDto {
 	private int boardWriter;
 	private Date boardCreateDate;
 	private Date boardUpdateDate;
+	private MemberDto memberDto;
 	
+	public MemberDto getMemberDto() {
+		return memberDto;
+	}
+	public void setMemberDto(MemberDto memberDto) {
+		this.memberDto = memberDto;
+	}
 	public int getBoardNo() {
 		return boardNo;
 	}

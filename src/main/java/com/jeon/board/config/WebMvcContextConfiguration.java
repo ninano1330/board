@@ -24,9 +24,12 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter{
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/js/**").addResourceLocations("/js/*").setCachePeriod(600000);
-		registry.addResourceHandler("/image/**").addResourceLocations("/image/*").setCachePeriod(600000);
-		registry.addResourceHandler("/css/**").addResourceLocations("/css/*").setCachePeriod(600000);
+		registry.addResourceHandler("/js/**").addResourceLocations("classpath:/js/").setCachePeriod(600000);
+		registry.addResourceHandler("/image/**").addResourceLocations("classpath:/image/").setCachePeriod(600000);
+		registry.addResourceHandler("/css/**").addResourceLocations("classpath:/css/").setCachePeriod(600000);
+//		registry.addResourceHandler("/js/**").addResourceLocations("classpath:/js/").setCachePeriod(600000).resourceChain(true);
+//		registry.addResourceHandler("/image/**").addResourceLocations("classpath:/image/").setCachePeriod(600000).resourceChain(true);
+//		registry.addResourceHandler("/css/**").addResourceLocations("classpath:/css/").setCachePeriod(600000).resourceChain(true);
 	}
 
 	@Override
@@ -38,20 +41,21 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter{
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		registry.jsp("/WEB-INF/views/", ".jsp");
 	}
+//	@Bean
+//  public InternalResourceViewResolver getInternalResourceViewResolver() {
+//      InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//      resolver.setPrefix("/WEB-INF/views/");
+//      resolver.setSuffix(".jsp");
+//      return resolver;
+//  }
+	
+	
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new LoginIntercepter());
+//		registry.addInterceptor(new LoginIntercepter());
 	}
 	
-	
-	
-//	@Bean
-//    public InternalResourceViewResolver getInternalResourceViewResolver() {
-//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-//        resolver.setPrefix("/WEB-INF/views/");
-//        resolver.setSuffix(".jsp");
-//        return resolver;
-//    }
+
 	
 }

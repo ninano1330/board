@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Board Form</title>
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/board/write.do" method="post">
