@@ -25,7 +25,7 @@ public class BoardApiController {
 		List<BoardDto> boardAllList = null;
 		
 		if(boardDto.getBoardNo() == 0 ) {
-			boardAllList = boardService.boardAllList();
+			boardAllList = boardService.allList();
 		}else {
 			
 		}

@@ -53,7 +53,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter{
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-//		registry.addInterceptor(new LoginIntercepter());
+		registry.addInterceptor(new LoginIntercepter());
 	}
 	
 

@@ -76,6 +76,7 @@ public class LoginIntercepter extends HandlerInterceptorAdapter {
 		excludeMappingPath.add("/login");
 		excludeMappingPath.add("/main");
 		excludeMappingPath.add("/boards");
+		excludeMappingPath.add("/board/detail.do");
 		
 		return excludeMappingPath;
 	}

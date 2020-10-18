@@ -6,6 +6,7 @@ public class MemberDto {
 	private int memberNo;
 	private String memberId;
 	private String memberPw;
+	private String memberName;
 	private Date memberJoinDate;
 	private int memberGrade;
 	private String memberPhone;
@@ -52,5 +53,11 @@ public class MemberDto {
 	}
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
+	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 }

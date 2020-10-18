@@ -9,8 +9,8 @@ public class BoardDto {
 	private int boardWriter;
 	private Date boardCreateDate;
 	private Date boardUpdateDate;
-	private MemberDto memberDto;
-	
+	private MemberDto memberDto = new MemberDto();
+
 	public MemberDto getMemberDto() {
 		return memberDto;
 	}

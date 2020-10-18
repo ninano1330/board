@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jeon.board.dto.BoardDto;
+import com.jeon.board.dto.MemberDto;
 import com.jeon.board.service.BoardService;
 
 @Controller
@@ -36,20 +38,34 @@ public class BoardController {
 	
 	@RequestMapping(value="/write.do", method=RequestMethod.POST)
 	public String boardWrite(BoardDto boardDto, HttpServletRequest request) {
-		boardService.boardWrite(boardDto, request);
+		HttpSession session = request.getSession();
+		MemberDto boardSessionId = (MemberDto) session.getAttribute("boardSessionId");
+		
+		boardService.write(boardDto, boardSessionId.getMemberNo());
 		
 		return "main";		
 	}
 	
-	@RequestMapping(value="/update.do", method=RequestMethod.PUT)
+	@RequestMapping(value="/update.do", method=RequestMethod.GET)
 	public String boardUpdate() {
-		return "main";
+		
+		return "boardUpdate";
 	}
 	
 	@RequestMapping(value="/detail.do", method=RequestMethod.GET)
-	public String boardDetail(BoardDto boardDto) {
+	public String boardDetail(int boardNo, HttpServletRequest request) {
+		request.setAttribute("board", boardService.getByBoardNo(boardNo));
 		
 		return "board/boardDetail";
 	}
 	
+	
+	@RequestMapping(value="/delete.do", method=RequestMethod.GET)
+	public String boardDelete(int boardNo) {
+		System.out.println("BoardController /board/delete.do");
+		
+		//boardService.delete(boardNo);
+		
+		return "main";
+	}
 }

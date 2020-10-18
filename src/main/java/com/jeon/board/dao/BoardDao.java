@@ -1,7 +1,10 @@
 package com.jeon.board.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -26,7 +29,24 @@ public class BoardDao {
 	
 	//camel 표기법과 table column 자동 매핑
 	private RowMapper<BoardDto> rowMapper = BeanPropertyRowMapper.newInstance(BoardDto.class);
-	//private RowMapper<BoardDto> rowMapper = BeanPropertyRowMapper.newInstance(BoardDto.class);
+	
+	private RowMapper<BoardDto> BoardMemberRowMapper = new RowMapper<BoardDto>() {
+		@Override
+		public BoardDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+			BoardDto boardDto = new BoardDto();
+			
+			boardDto.setBoardNo(rs.getInt("BOARD_NO"));
+			boardDto.setBoardTitle(rs.getString("BOARD_TITLE"));
+			boardDto.setBoardContent(rs.getString("BOARD_CONTENT"));
+			boardDto.setBoardWriter(rs.getInt("BOARD_WRITER"));
+			boardDto.setBoardCreateDate(rs.getDate("BOARD_CREATE_DATE"));
+			boardDto.setBoardUpdateDate(rs.getDate("BOARD_UPDATE_DATE"));
+			//System.out.println("ROWMAPPER MEMBER_ID : " + rs.getString("MEMBER_ID"));
+			boardDto.getMemberDto().setMemberId(rs.getString("MEMBER_ID"));
+			//System.out.println(boardDto.getMemberDto().getMemberId());
+			return boardDto;
+		}
+	};
 	
 	public BoardDao(DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
@@ -44,10 +64,12 @@ public class BoardDao {
 		return 1;
 	}
 	
-	public int deleteBoard(BoardDto boardDto) {
-		String sql = "DELETE FROM BOARD WHERE BOARD_ID = boardId";
+	public int deleteBoard(int boardNo) {
+		String sql = "DELETE FROM BOARD WHERE BOARD_NO = :boardNo";
 		
-		SqlParameterSource params = new BeanPropertySqlParameterSource(boardDto);
+		//SqlParameterSource params = new BeanPropertySqlParameterSource(boardNo);
+		Map<String,Object> params = Collections.singletonMap("boardNo", boardNo);
+		
 		return jdbc.update(sql, params);
 	}
 	
@@ -57,6 +79,7 @@ public class BoardDao {
 		return jdbc.query(sql, rowMapper);
 	}
 	
+	
 	public BoardDto selectBoard(int boardNo) {
 		String sql = "SELECT * "
 				+ "FROM BOARD B, MEMBER M "
@@ -64,7 +87,8 @@ public class BoardDao {
 				+ "AND B.BOARD_WRITER = M.MEMBER_NO "
 				+ "AND B.BOARD_NO = :boardNo ";
 		
-		return jdbc.queryForObject(sql, Collections.singletonMap("boardNo", boardNo), rowMapper);
+		//return jdbc.queryForObject(sql, Collections.singletonMap("boardNo", boardNo), rowMapper);
+		return jdbc.queryForObject(sql, Collections.singletonMap("boardNo", boardNo), BoardMemberRowMapper);	
 	}
 	
 }

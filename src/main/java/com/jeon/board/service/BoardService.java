@@ -18,17 +18,22 @@ public class BoardService {
 	@Autowired
 	BoardDao boardDao;
 	
-	public int boardWrite(BoardDto boardDto, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		MemberDto boardSessionId = (MemberDto) session.getAttribute("boardSessionId");
-		
-		boardDto.setBoardWriter(boardSessionId.getMemberNo());
+	public int write(BoardDto boardDto, int memberNo) {
+		boardDto.setBoardWriter(memberNo);
 		boardDto.setBoardCreateDate(new Date());
 		
 		return boardDao.insertBoard(boardDto);
 	}
 	
-	public List<BoardDto> boardAllList(){
+	public List<BoardDto> allList(){
 		return boardDao.selectAllBoard();
+	}
+	
+	public BoardDto getByBoardNo(int boardNo) {
+		return boardDao.selectBoard(boardNo);
+	}
+	
+	public int delete(int boardNo) {
+		return boardDao.deleteBoard(boardNo);
 	}
 }
