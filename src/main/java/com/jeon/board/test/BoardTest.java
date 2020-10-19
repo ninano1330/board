@@ -25,7 +25,7 @@ public class BoardTest {
 		BoardDto boardDto = boardService.getByBoardNo(boardNo);
 		System.out.println(boardDto.getBoardTitle());
 		System.out.println(boardDto.getBoardContent());
-		System.out.println(boardDto.getBoardWriter());
+		System.out.println(boardDto.getmemberNo());
 		System.out.println(boardDto.getMemberDto().getMemberId());
 	}
 

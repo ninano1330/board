@@ -6,7 +6,7 @@ public class BoardDto {
 	private int boardNo;
 	private String boardTitle;
 	private String boardContent;
-	private int boardWriter;
+	private int memberNo;
 	private Date boardCreateDate;
 	private Date boardUpdateDate;
 	private MemberDto memberDto = new MemberDto();
@@ -35,11 +35,11 @@ public class BoardDto {
 	public void setBoardContent(String boardContent) {
 		this.boardContent = boardContent;
 	}
-	public int getBoardWriter() {
-		return boardWriter;
+	public int getmemberNo() {
+		return memberNo;
 	}
-	public void setBoardWriter(int boardWriter) {
-		this.boardWriter = boardWriter;
+	public void setmemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
 	public Date getBoardCreateDate() {
 		return boardCreateDate;

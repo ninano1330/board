@@ -1,9 +1,8 @@
 package com.jeon.board.config;
 
-import java.util.ArrayList;
+import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,8 +20,11 @@ public class LoginIntercepter extends HandlerInterceptorAdapter {
 		String contextPath = request.getContextPath();
 		String requestURI = request.getRequestURI();
 		String servletPath = request.getServletPath();
+		String serverName = request.getServerName();
+		StringBuffer requestURL = request.getRequestURL();
+		String referer = request.getHeader("Referer");
 		
-		System.out.println("contextPath : " + contextPath);
+//		System.out.println("contextPath : " + contextPath);
 		
 		if(chkExcludeMappingPath(servletPath) == true) {
 			System.out.println("This " + servletPath + " path don't need to login.");
@@ -33,7 +35,15 @@ public class LoginIntercepter extends HandlerInterceptorAdapter {
 				return true;
 			}else {
 				System.out.println("You need login !!!");
-				response.sendRedirect(contextPath + "/login/form.do");
+//				System.out.println("requestURI : " + requestURI);
+//				System.out.println("requestURL : " + requestURL);
+//				System.out.println("referer : " + referer);
+				
+				PrintWriter printWriter = response.getWriter();
+				printWriter.print("<script>window.open('/board/login/form.do');location.href='"+referer+"';</script>");
+				printWriter.flush();
+				printWriter.close();
+//				response.sendRedirect(referer);
 				return false;
 			}
 		}

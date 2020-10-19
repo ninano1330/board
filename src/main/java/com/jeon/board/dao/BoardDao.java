@@ -38,7 +38,7 @@ public class BoardDao {
 			boardDto.setBoardNo(rs.getInt("BOARD_NO"));
 			boardDto.setBoardTitle(rs.getString("BOARD_TITLE"));
 			boardDto.setBoardContent(rs.getString("BOARD_CONTENT"));
-			boardDto.setBoardWriter(rs.getInt("BOARD_WRITER"));
+			boardDto.setmemberNo(rs.getInt("MEMBER_NO"));
 			boardDto.setBoardCreateDate(rs.getDate("BOARD_CREATE_DATE"));
 			boardDto.setBoardUpdateDate(rs.getDate("BOARD_UPDATE_DATE"));
 			//System.out.println("ROWMAPPER MEMBER_ID : " + rs.getString("MEMBER_ID"));
@@ -61,7 +61,10 @@ public class BoardDao {
 	}
 	
 	public int updateBoard(BoardDto boardDto) {
-		return 1;
+		String sql = "UPDATE BOARD SET BOARD_TITLE = :boardTitle, BOARD_CONTENT = :boardContent WHERE BOARD_NO = :boardNo";
+		SqlParameterSource params = new BeanPropertySqlParameterSource(boardDto);
+		
+		return jdbc.update(sql, params);
 	}
 	
 	public int deleteBoard(int boardNo) {
@@ -75,8 +78,10 @@ public class BoardDao {
 	
 	
 	public List<BoardDto> selectAllBoard() {
-		String sql = "SELECT * FROM BOARD";
-		return jdbc.query(sql, rowMapper);
+		String sql = "SELECT * FROM BOARD B, MEMBER M WHERE B.MEMBER_NO = M.MEMBER_NO";
+		
+		//return jdbc.query(sql, rowMapper);
+		return jdbc.query(sql, BoardMemberRowMapper);
 	}
 	
 	
@@ -84,7 +89,7 @@ public class BoardDao {
 		String sql = "SELECT * "
 				+ "FROM BOARD B, MEMBER M "
 				+ "WHERE 1=1 "
-				+ "AND B.BOARD_WRITER = M.MEMBER_NO "
+				+ "AND B.MEMBER_NO = M.MEMBER_NO "
 				+ "AND B.BOARD_NO = :boardNo ";
 		
 		//return jdbc.queryForObject(sql, Collections.singletonMap("boardNo", boardNo), rowMapper);

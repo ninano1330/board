@@ -19,7 +19,7 @@ public class BoardService {
 	BoardDao boardDao;
 	
 	public int write(BoardDto boardDto, int memberNo) {
-		boardDto.setBoardWriter(memberNo);
+		boardDto.setmemberNo(memberNo);
 		boardDto.setBoardCreateDate(new Date());
 		
 		return boardDao.insertBoard(boardDto);
@@ -31,6 +31,10 @@ public class BoardService {
 	
 	public BoardDto getByBoardNo(int boardNo) {
 		return boardDao.selectBoard(boardNo);
+	}
+	
+	public int update(BoardDto boardDto) {
+		return boardDao.updateBoard(boardDto);
 	}
 	
 	public int delete(int boardNo) {

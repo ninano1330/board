@@ -47,9 +47,21 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/update.do", method=RequestMethod.GET)
-	public String boardUpdate() {
+	public String boardUpdateForm(int boardNo, HttpServletRequest request) {
+		request.setAttribute("board", boardService.getByBoardNo(boardNo));
 		
-		return "boardUpdate";
+		return "board/boardUpdate";
+	}
+	
+	@RequestMapping(value="/update.do", method=RequestMethod.POST)
+	public String boardUpdate(BoardDto boardDto, HttpServletRequest request) {
+		System.out.println("boardNo : " + boardDto.getBoardNo());
+		System.out.println("boardTitle : " + boardDto.getBoardTitle());
+		System.out.println("boardContent : " + boardDto.getBoardContent());
+		
+		boardService.update(boardDto);
+		
+		return "main";
 	}
 	
 	@RequestMapping(value="/detail.do", method=RequestMethod.GET)
@@ -59,12 +71,9 @@ public class BoardController {
 		return "board/boardDetail";
 	}
 	
-	
 	@RequestMapping(value="/delete.do", method=RequestMethod.GET)
 	public String boardDelete(int boardNo) {
-		System.out.println("BoardController /board/delete.do");
-		
-		//boardService.delete(boardNo);
+		boardService.delete(boardNo);
 		
 		return "main";
 	}

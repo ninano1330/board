@@ -24,6 +24,7 @@ span{
 <div id='boardList'>
 </div>
 <br>
+<button onclick='window.open("/board/login/form.do","loginPopup","width=300,height=200")'>로그인</button>
 <a href="${pageContext.request.contextPath}/board/form.do" style="float: right;">글쓰기</a>
 <script>
 function getBoardList(formData){
@@ -76,7 +77,8 @@ function drawBoardList(boardAllList){
 		innerHtml += "</span>";
 		innerHtml += "</a>";
 		innerHtml += "<span class='boardWriter'>";
-		innerHtml += boardAllList[i].boardWriter;
+		//innerHtml += boardAllList[i].boardWriter;
+		innerHtml += boardAllList[i].memberDto.memberId;
 		innerHtml += "</span>";
 		innerHtml += "</div>";
 		innerHtml += "<br>";
