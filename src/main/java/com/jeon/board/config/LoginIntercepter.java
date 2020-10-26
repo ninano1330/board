@@ -38,12 +38,13 @@ public class LoginIntercepter extends HandlerInterceptorAdapter {
 //				System.out.println("requestURI : " + requestURI);
 //				System.out.println("requestURL : " + requestURL);
 //				System.out.println("referer : " + referer);
-				
+//				response.sendRedirect(contextPath+"/login/form.do");
 				PrintWriter printWriter = response.getWriter();
 				printWriter.print("<script>window.open('/board/login/form.do');location.href='"+referer+"';</script>");
+				//printWriter.print("<script>window.open('/board/login/form.do');<script>");
 				printWriter.flush();
 				printWriter.close();
-//				response.sendRedirect(referer);
+				
 				return false;
 			}
 		}
