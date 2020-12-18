@@ -1,5 +1,6 @@
 package com.jeon.board.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @ComponentScan(basePackages= {"com.jeon.board.controller"})
 public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter{
+	@Value("{exclude.path.patterns}")
+	private String test;
 
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
@@ -53,9 +56,12 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter{
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new LoginIntercepter());
+		registry.addInterceptor(new LoginIntercepter())
+		.excludePathPatterns("/main","/boards/all","/login");
 	}
 	
-
+	private String getexcludePathPatterns() {
+		return "test";
+	}
 	
 }

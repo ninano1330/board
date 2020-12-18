@@ -8,35 +8,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jeon.board.dto.MemberDto;
 import com.jeon.board.service.LoginService;
 
 @Controller
-@RequestMapping("/login")
 public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
-	@GetMapping(value="form.do")
+	@GetMapping(value="/login")
 	public String loginForm() {
 		return "login/loginForm";
 	}
 	
-	@PostMapping(value="login.do")
+	@PostMapping(value="/login")
+	@ResponseBody
 	public String login(MemberDto memberDto, HttpServletRequest request) {
 		MemberDto boardSessionId = loginService.login(memberDto);
 		HttpSession session = request.getSession();
 		session.setAttribute("boardSessionId", boardSessionId);
 		
-		return "main";
+		//return "success";
+		return "<script>window.close();</script>";
 	}
 
-	public LoginService getLoginService() {
-		return loginService;
-	}
-
-	public void setLoginService(LoginService loginService) {
-		this.loginService = loginService;
-	}
 }

@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.jeon.board.config.ApplicationConfig;
-import com.jeon.board.controller.BoardApiController;
+import com.jeon.board.controller.BoardAPIController;
 import com.jeon.board.dao.LoginDao;
 import com.jeon.board.dto.BoardDto;
 import com.jeon.board.dto.MemberDto;
