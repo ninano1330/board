@@ -56,12 +56,12 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter{
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new LoginIntercepter())
+		registry.addInterceptor(new LoginInterceptor())
 		.excludePathPatterns("/main","/boards/all","/login");
 	}
 	
 	private String getexcludePathPatterns() {
-		return "test";
+		return "";
 	}
 	
 }

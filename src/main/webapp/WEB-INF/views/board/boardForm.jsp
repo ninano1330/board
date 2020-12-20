@@ -8,11 +8,21 @@
 </head>
 <body>
 <!-- <form action="${pageContext.request.contextPath}/board/write.do" method="post"> -->
-<form action="${pageContext.request.contextPath}/boards" method="post">
+<form id="boardForm" method="post">
 	제목 : <input type="text" name="boardTitle"> <br>
 	내용 : <input type="text" name="boardContent"> <br>
 	<input type="submit" value="글쓰기" />
 </form>
+<script>
+function setDOM(){
+	var uri = "${pageContext.request.contextPath}/boards";
+	
+	document.getElementById("boardForm").action = uri;
+}
 
+window.onload = function(){
+	setDOM();
+}
+</script>
 </body>
 </html>

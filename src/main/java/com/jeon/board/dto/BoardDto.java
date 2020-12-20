@@ -53,4 +53,9 @@ public class BoardDto {
 	public void setBoardUpdateDate(Date boardUpdateDate) {
 		this.boardUpdateDate = boardUpdateDate;
 	}
+	
+	@Override
+	public String toString() {
+		return "[boardNo : " + boardNo + " ]";
+	}
 }

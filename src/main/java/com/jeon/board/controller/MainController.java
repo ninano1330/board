@@ -20,20 +20,6 @@ public class MainController{
 	
 	@GetMapping(value="/main")
 	public String main(Model model) {
-	//public Map<String, Object> main(Model model) {
-		
-//		List<BoardDto> boardAllList = boardService.boardAllList();
-		//model.addAttribute("boardAllList", boardAllList);
-		
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("boardAllList", boardAllList);
-		
 		return "main";
 	}
-	
-//	@RequestMapping(path="/main", method=RequestMethod.GET)
-//	public String main2() {
-//		System.out.println("hi");
-//		return "main";
-//	}
 }

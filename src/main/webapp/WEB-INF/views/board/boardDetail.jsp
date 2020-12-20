@@ -8,83 +8,71 @@
 <title>Board Detail</title>
 </head>
 <body>
-<%-- <form action='${pageContext.request.contextPath}/board/update.do' method='get'> --%>
-	<table border='1'>
-<%-- 		<input type='hidden' name='boardNo' value='${board.boardNo }'> --%>
+<form id="boardForm" method="post">
+	<input type="hidden" id="boardNo" name="boardNo">
+	<input type="hidden" id="boardTitle" name="boardTitle">
+	<input type="hidden" id="memberId" name="memberId">
+	<input type="hidden" id="boardContent" name="boardContent">
+	
+	<table border='1'> 		
 		<tr>
 			<td width='10%'>제목</td>
-			<td id='boardTitle' name='boardTitle' width='90%'></td>
+			<td id='boardTitleTd' width='90%'></td>
 		</tr>
 		<tr>
 			<td>작성자</td>
-			<td id='mebmerId' name='mebmerId'></td>
+			<td id='memberIdTd'></td>
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td id='boardContent' name='boardContent'></td>
+			<td id='boardContentTd'></td>
 		</tr>
 	</table>
-<!-- 	<input type="submit" value="수정"> -->
-<!-- </form> -->
-<div id='btnDiv'>
-	<button onclick='updateBoard()'>수정</button>
-	<button onclick='deleteBoard()'>삭제</button>
-</div>
+</form>
+<div id='btnDiv'></div>
 <script>
-window.onload = function(){
+function updateBoard(){
+	var uri = "${pageContext.request.contextPath}/boards/me/form";
+	document.getElementById("boardForm").action = uri;
+
+	document.getElementById("boardForm").submit();	
+}
+
+function deleteBoard(){
+	var boardNo = document.getElementById("boardNo").value;
+	var uri = "${pageContext.request.contextPath}/boards/me/"+boardNo;
+	document.getElementById("boardForm").action = uri;
+
+	document.getElementById("boardForm").submit();	
+}
+
+function setDOM(){
+	var boardNo = "${board.boardNo}";
 	var boardTitle = "${board.boardTitle }";
 	var boardContent = "${board.boardContent }";
 	var memberId = "${board.memberDto.memberId }";
 	var memberNo = "${board.memberNo}";
-
+	
 	//session
 	var sessionMemberNo = "${boardSessionId.memberNo}";
 
-// 	console.log(boardWriter);
-// 	console.log(memberNo);
-	
-	var titleTd = document.getElementById("boardTitle");
-	var idTd = document.getElementById("mebmerId");
-	var contentTd = document.getElementById("boardContent");
+	document.getElementById("boardTitleTd").innerHTML = boardTitle;
+	document.getElementById("memberIdTd").innerHTML = memberId;
+	document.getElementById("boardContentTd").innerHTML = boardContent;
 
-	titleTd.innerHTML = boardTitle;
-	idTd.innerHTML = memberId;
-	contentTd.innerHTML = boardContent;
+	document.getElementById("boardNo").value = boardNo;
+	document.getElementById("boardTitle").value = boardTitle;
+	document.getElementById("boardContent").value = boardContent;
+	document.getElementById("memberId").value = memberId;
 
 	if(sessionMemberNo == memberNo){
 		var btnDiv = document.getElementById("btnDiv");
-// 		btnDiv.innerHTML = "<button onclick='updateBoard()'>수정</button>" 
-//			+ "<button onclick='deleteBoard()'>삭제</button>";
+		btnDiv.innerHTML = "<button onclick='updateBoard()'>수정</button>" 
+						+ "<button onclick='deleteBoard()'>삭제</button>";
 	}
 }
 
-function updateBoard(){
-	console.log("updateBoard");
-	
-	var boardNo = "${board.boardNo }";
-	var url = "${pageContext.request.contextPath}" + "/board/update.do?boardNo=" + boardNo;
-
-	window.location.href = url;
-// 	var xMLHttpRequest = new XMLHttpRequest();
-
-// 	xMLHttpRequest.open("GET",url);
-// 	xMLHttpRequest.send();
-}
-
-function deleteBoard(){
-	console.log("deleteBoard");
-	
-	var boardNo = "${board.boardNo }";
-	var url = "${pageContext.request.contextPath}" + "/board/delete.do?boardNo=" + boardNo;
-
-	window.location.href = url;
-// 	var xMLHttpRequest = new XMLHttpRequest();
-
-// 	xMLHttpRequest.open("GET",url);
-// 	xMLHttpRequest.send();
-}
-
-function test(){
+function getRequestInfor(){
 	var contextPath = "${pageContext.request.contextPath}";
 	var requestURL = "${pageContext.request.requestURL}";
 	var requestURI = "${pageContext.request.requestURI}";
@@ -98,7 +86,9 @@ function test(){
 	console.log("serverName : " + serverName);
 }
 
-test();
+window.onload = function(){
+	setDOM();
+}
 </script>
 </body>
 </html>

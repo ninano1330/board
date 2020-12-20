@@ -36,7 +36,13 @@ public class LoginDao {
 		String sql = "SELECT * FROM MEMBER WHERE MEMBER_ID = :memberId AND MEMBER_PW = :memberPw";
 		SqlParameterSource param = new BeanPropertySqlParameterSource(memberDto);
 		
+		try {
+			return jdbc.queryForObject(sql, param, rowMapper);
+		}catch(Exception e) {
+			return null;
+		}
+		
 		//return jdbc.query(sql, param, rowMapper);
-		return jdbc.queryForObject(sql, param, rowMapper);
+		
 	}
 }

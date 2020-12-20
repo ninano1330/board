@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jeon.board.dto.BoardDto;
@@ -33,7 +35,7 @@ public class BoardController {
 	
 	//@RequestMapping(value="/detail.do", method=RequestMethod.GET)
 	@RequestMapping(value="/boards/{boardNo}", method=RequestMethod.GET)
-	public String boardDetail(@PathVariable int boardNo, HttpServletRequest request) {
+	public String boardDetail(@PathVariable int boardNo, HttpServletRequest request) {		
 		request.setAttribute("board", boardService.getByBoardNo(boardNo));
 		
 		return "board/boardDetail";
@@ -41,7 +43,7 @@ public class BoardController {
 	
 	@RequestMapping(value="/boards/all", method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> getBoard(BoardDto boardDto) {
+	public Map<String, Object> getBoardsAll(BoardDto boardDto) {
 		List<BoardDto> boardAllList = null;
 		
 		if(boardDto.getBoardNo() == 0 ) {
@@ -56,17 +58,9 @@ public class BoardController {
 		return map;
 	}
 	
-	//@RequestMapping(value="/update.do", method=RequestMethod.GET)
-	@RequestMapping(value="/boards/{boardNo}", method=RequestMethod.PUT)
-	public String boardUpdateForm(@PathVariable int boardNo, HttpServletRequest request) {
-		request.setAttribute("board", boardService.getByBoardNo(boardNo));
-		
-		return "board/boardUpdate";
-	}
-	
 	//@RequestMapping(value="/write.do", method=RequestMethod.POST)
 	@RequestMapping(value="/boards", method=RequestMethod.POST)
-	public String boardWrite(BoardDto boardDto, HttpServletRequest request) {
+	public String boardInsert(BoardDto boardDto, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		MemberDto boardSessionId = (MemberDto) session.getAttribute("boardSessionId");
 		
@@ -75,25 +69,31 @@ public class BoardController {
 		return "main";		
 	}
 	
-	//@RequestMapping(value="/update.do", method=RequestMethod.POST)
-	@RequestMapping(value="/boards", method=RequestMethod.PUT)
-	public String boardUpdate(BoardDto boardDto, HttpServletRequest request) {
+	@RequestMapping(value="/boards/me", method=RequestMethod.POST)
+	public String boardUpdate(BoardDto boardDto, HttpServletRequest request){
 		boardService.update(boardDto);
 		
 		return "main";
 	}
 	
-
-	
-	@RequestMapping(value="/boards", method=RequestMethod.DELETE)
-	public String boardDelete(int boardNo) {
+	@RequestMapping(value="/boards/me/{boardNo}", method=RequestMethod.POST)
+	public String boardDelete(@PathVariable int boardNo){
 		boardService.delete(boardNo);
 		
 		return "main";
 	}
 	
 	@RequestMapping(value="/boards/form", method=RequestMethod.GET)
-	public String boardForm() {
+	public String boardInsertForm() {
 		return "board/boardForm";		
+	}
+	
+	@RequestMapping(value="/boards/me/form", method=RequestMethod.POST)
+	public String boardUpdateform(BoardDto boardDto, String memberId, HttpServletRequest request) {
+		boardDto.getMemberDto().setMemberId(memberId);
+		
+		request.setAttribute("board", boardDto);
+		
+		return "board/boardUpdate";
 	}
 }

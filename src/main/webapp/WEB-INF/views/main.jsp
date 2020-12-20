@@ -25,7 +25,7 @@ span{
 </div>
 <br>
 <!-- <button onclick='window.open("/board/login/form.do","loginPopup","width=300,height=200")'>로그인</button>  -->
-<button onclick='open_wnd_check_blockpopup()'>로그인</button>
+<button id="loginBtn" onclick='openLoginForm();'>로그인</button>
 <!--  <a href="${pageContext.request.contextPath}/board/form.do" style="float: right;">글쓰기</a> -->
 <a href="${pageContext.request.contextPath}/boards/form" style="float: right;">글쓰기</a>
 <script>
@@ -91,7 +91,34 @@ function drawBoardList(boardAllList){
 	boardList.innerHTML = innerHtml;
 }
 
-getBoardList();
+function openLoginForm(){
+	//alert("openLoginForm");
+	//window.open('/board/login');
+	location.href = '${pageContext.request.contextPath}/login';
+}
+
+function logout(){
+	location.href = "${pageContext.request.contextPath}/logout";
+}
+
+function chkDOM(){
+	var loginBtn = document.getElementById("loginBtn");
+	var boardSessionId = "${boardSessionId}";
+	
+	if("${not empty boardSessionId}"){
+		loginBtn.setAttribute("onclick", "logout();");
+		loginBtn.innerText = "로그아웃";
+	}else{
+		//console.log("no login");
+		loginBtn.setAttribute("onclick", "openLoginForm();");
+		loginBtn.innerText = "로그인";
+	}
+}
+
+window.onload = function(){
+	chkDOM();
+	getBoardList();
+}
 </script>
 </body>
 </html>
