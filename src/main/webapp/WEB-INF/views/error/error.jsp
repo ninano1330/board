@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>에러 페이지</title>
+<title>ERR PAGE</title>
 </head>
 <body>
 에러 타입: <%= exception.getClass().getName() %> <br>

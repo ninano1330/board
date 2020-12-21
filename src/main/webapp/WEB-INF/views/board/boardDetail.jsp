@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Board Detail</title>
+<title>BOARD DETAIL</title>
 </head>
 <body>
 <form id="boardForm" method="post">

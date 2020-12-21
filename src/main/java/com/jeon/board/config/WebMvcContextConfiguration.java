@@ -57,7 +57,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new LoginInterceptor())
-		.excludePathPatterns("/main","/boards/all","/login");
+		.excludePathPatterns("/main","/boards/all","/login", "/logout");
 	}
 	
 	private String getexcludePathPatterns() {

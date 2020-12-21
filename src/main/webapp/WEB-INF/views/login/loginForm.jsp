@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>LOGIN</title>
 </head>
 <body>
 	<!-- <form id='form' action="${pageContext.request.contextPath}/login" method="post" > -->
@@ -59,10 +59,7 @@ function login(){
 	var memberPw = document.getElementById("memberPw");
 	
 	var url = "${pageContext.request.contextPath}/login";
-// 	console.log(url);
-// 	console.log(memberId.value);
-// 	console.log(memberPw.value);
-	
+
 	var xmlHttpRequest = new XMLHttpRequest();
 
 	//비동기 방식으로 Request를 오픈
@@ -71,7 +68,8 @@ function login(){
 
 	//post 전송 시 MIME type 설정
 	xmlHttpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
+	//request.setRequestHeader("Content-Type", "text/plain;charset=UTF-8"); //요청 본문 일반 텍스트
+	
 	//post 파라미터
 	xmlHttpRequest.send("memberId="+memberId.value+"&memberPw="+memberPw.value);
 
@@ -82,7 +80,7 @@ function login(){
 
 	    if (xmlHttpRequest.status === 200){
 			var result = xmlHttpRequest.responseText;
-			console.log("result : " + result);
+			//console.log("result : " + result);
 			if(result == 1){
 				location.href = document.referrer;
 				//window.close();

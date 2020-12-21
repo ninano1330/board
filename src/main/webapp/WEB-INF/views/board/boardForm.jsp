@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Board Form</title>
+<title>BOARD FORM</title>
 </head>
 <body>
 <!-- <form action="${pageContext.request.contextPath}/board/write.do" method="post"> -->

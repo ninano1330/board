@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>자유게시판</title>
 <!-- <link rel="stylesheet" href="css/style.css"> -->
+<script src="/js/test.js"></script>
 <style>
 span{
 	float:left;
@@ -20,6 +21,7 @@ span{
 </style>
 </head>
 <body>
+<jsp:include page="header/header.jsp"/>
 <center><h1>자유게시판</h1></center>
 <div id='boardList'>
 </div>
@@ -30,10 +32,6 @@ span{
 <a href="${pageContext.request.contextPath}/boards/form" style="float: right;">글쓰기</a>
 <script>
 function getBoardList(formData){
-	//alert(formData.elements['id'].value);
-	//alert(formData.elements['type'].value);
-	//var id = formData.elements['id'].value;
-	
 	// XMLHttpRequest 객체의 생성
 	var xmlHttp = new XMLHttpRequest();
 	var url = '${pageContext.request.contextPath}/boards/all';
@@ -86,34 +84,32 @@ function drawBoardList(boardAllList){
 		innerHtml += "</div>";
 		innerHtml += "<br>";
 	}
-	console.log(innerHtml);
-	console.log(boardList);
+// 	console.log(innerHtml);
+// 	console.log(boardList);
 	boardList.innerHTML = innerHtml;
 }
 
-function openLoginForm(){
-	//alert("openLoginForm");
-	//window.open('/board/login');
-	location.href = '${pageContext.request.contextPath}/login';
-}
+// function openLoginForm(){
+// 	location.href = '${pageContext.request.contextPath}/login';
+// }
 
-function logout(){
-	location.href = "${pageContext.request.contextPath}/logout";
-}
+// function logout(){
+// 	location.href = "${pageContext.request.contextPath}/logout";
+// }
 
-function chkDOM(){
-	var loginBtn = document.getElementById("loginBtn");
-	var boardSessionId = "${boardSessionId}";
+// function chkDOM(){
+// 	var loginBtn = document.getElementById("loginBtn");
+// 	var boardSessionId = "${boardSessionId}";
 	
-	if("${not empty boardSessionId}"){
-		loginBtn.setAttribute("onclick", "logout();");
-		loginBtn.innerText = "로그아웃";
-	}else{
-		//console.log("no login");
-		loginBtn.setAttribute("onclick", "openLoginForm();");
-		loginBtn.innerText = "로그인";
-	}
-}
+// 	if(${not empty boardSessionId}){
+// 		loginBtn.setAttribute("onclick", "logout();");
+// 		loginBtn.innerText = "로그아웃";
+// 	}else{
+// 		//console.log("no login");
+// 		loginBtn.setAttribute("onclick", "openLoginForm();");
+// 		loginBtn.innerText = "로그인";
+// 	}
+// }
 
 window.onload = function(){
 	chkDOM();
