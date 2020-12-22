@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>BOARD UPDATE FORM</title>
 </head>
+<jsp:include page="/WEB-INF/views/header/header.jsp"/>
 <body>
 <!--  <form id="boardForm" action="${pageContext.request.contextPath}/boards/me" method="post"> -->
 <form id="boardForm" method="post">

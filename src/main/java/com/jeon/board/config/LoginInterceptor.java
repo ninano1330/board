@@ -60,7 +60,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			PrintWriter printWriter = response.getWriter();
 			
 			//printWriter.print("<script>window.open('/board/login/form.do');location.href='"+referer+"';</script>");
-			printWriter.print("<script>window.open('/board/login');location.href='"+referer+"';</script>");
+			//printWriter.print("<script>window.open('/board/login');location.href='"+referer+"';</script>");
+			printWriter.print("<script>location.href='/board/login';</script>");
 
 			printWriter.flush();
 			printWriter.close();

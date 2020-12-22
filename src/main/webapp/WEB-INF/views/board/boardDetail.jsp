@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>BOARD DETAIL</title>
 </head>
+<jsp:include page="/WEB-INF/views/header/header.jsp"/>
 <body>
 <form id="boardForm" method="post">
 	<input type="hidden" id="boardNo" name="boardNo">

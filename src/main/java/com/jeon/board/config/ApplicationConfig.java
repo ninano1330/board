@@ -7,6 +7,4 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @ComponentScan(basePackages = { "com.jeon.board.dao", "com.jeon.board.service"})
 @Import({ DBConfig.class })
-public class ApplicationConfig {
-
-}
+public class ApplicationConfig {}

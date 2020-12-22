@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false"%>
 <!DOCTYPE html>
@@ -84,37 +84,14 @@ function drawBoardList(boardAllList){
 		innerHtml += "</div>";
 		innerHtml += "<br>";
 	}
-// 	console.log(innerHtml);
-// 	console.log(boardList);
+
 	boardList.innerHTML = innerHtml;
 }
 
-// function openLoginForm(){
-// 	location.href = '${pageContext.request.contextPath}/login';
-// }
-
-// function logout(){
-// 	location.href = "${pageContext.request.contextPath}/logout";
-// }
-
-// function chkDOM(){
-// 	var loginBtn = document.getElementById("loginBtn");
-// 	var boardSessionId = "${boardSessionId}";
-	
-// 	if(${not empty boardSessionId}){
-// 		loginBtn.setAttribute("onclick", "logout();");
-// 		loginBtn.innerText = "로그아웃";
-// 	}else{
-// 		//console.log("no login");
-// 		loginBtn.setAttribute("onclick", "openLoginForm();");
-// 		loginBtn.innerText = "로그인";
-// 	}
-// }
-
-window.onload = function(){
-	chkDOM();
+document.addEventListener("DOMContentLoaded", function() {
+	chkHeaderDOM();
 	getBoardList();
-}
+});
 </script>
 </body>
 </html>

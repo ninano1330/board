@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>LOGIN</title>
 </head>
+<jsp:include page="/WEB-INF/views/header/header.jsp"/>
 <body>
 	<!-- <form id='form' action="${pageContext.request.contextPath}/login" method="post" > -->
 		아이디 : <input type="text" id="memberId"  name="memberId" onkeydown="chkInput(this);"> <br>
