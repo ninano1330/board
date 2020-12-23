@@ -57,6 +57,7 @@ public class BoardDao {
 	
 	public int insertBoard(BoardDto boardDto) {
 		SqlParameterSource params = new BeanPropertySqlParameterSource(boardDto);
+		
 		return insertAction.executeAndReturnKey(params).intValue();
 	}
 	
