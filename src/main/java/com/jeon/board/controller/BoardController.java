@@ -66,21 +66,24 @@ public class BoardController {
 		
 		boardService.write(boardDto, boardSessionId.getMemberNo());
 		
-		return "main";		
+		//return "main";		
+		return "redirect:/main";		
 	}
 	
 	@RequestMapping(value="/boards/me", method=RequestMethod.POST)
 	public String boardUpdate(BoardDto boardDto, HttpServletRequest request){
 		boardService.update(boardDto);
 		
-		return "main";
+		//return "main";
+		return "redirect:/main";
 	}
 	
 	@RequestMapping(value="/boards/me/{boardNo}", method=RequestMethod.POST)
 	public String boardDelete(@PathVariable int boardNo){
 		boardService.delete(boardNo);
 		
-		return "main";
+		//return "main";
+		return "redirect:/main";
 	}
 	
 	@RequestMapping(value="/boards/form", method=RequestMethod.GET)

@@ -27,7 +27,7 @@ span{
 </div>
 <br>
 <!-- <button onclick='window.open("/board/login/form.do","loginPopup","width=300,height=200")'>로그인</button>  -->
-<button id="loginBtn" onclick='openLoginForm();'>로그인</button>
+<!-- <button id="loginBtn" onclick='openLoginForm();'>로그인</button> -->
 <!--  <a href="${pageContext.request.contextPath}/board/form.do" style="float: right;">글쓰기</a> -->
 <a href="${pageContext.request.contextPath}/boards/form" style="float: right;">글쓰기</a>
 <script>

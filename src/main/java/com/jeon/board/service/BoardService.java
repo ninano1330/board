@@ -34,6 +34,7 @@ public class BoardService {
 	}
 	
 	public int update(BoardDto boardDto) {
+		boardDto.setBoardUpdateDate(new Date());
 		return boardDao.updateBoard(boardDto);
 	}
 	

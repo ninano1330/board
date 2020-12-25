@@ -1,5 +1,7 @@
 package com.jeon.board.service;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +14,11 @@ public class MemberService {
 	@Autowired
 	MemberDao MemberDao;
 	
-	public String insertMember(MemberDto memberDto) {
-		MemberDao.insertMember(memberDto);
-		return "";
+	public int insertMember(MemberDto memberDto) {
+		memberDto.setMemberGrade(1);
+		memberDto.setMemberJoinDate(new Date());
+		
+		return MemberDao.insertMember(memberDto);
 	}
 	
 	public String updateMember(MemberDto memberDto) {

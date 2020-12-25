@@ -54,18 +54,21 @@ public class LoginController {
 	}
 	
 	@GetMapping(value="/logout")
-	public void login(HttpServletRequest request, HttpServletResponse response) {
+	//public void login(HttpServletRequest request, HttpServletResponse response) {
+	public String login(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		session.removeAttribute("boardSessionId");
 		
 		try {
-			response.sendRedirect(request.getContextPath() + "/main");
-		} catch (IOException e) {
+			//response.sendRedirect(request.getContextPath() + "/main");
+			return "redirect:/main";
+		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			
 		}
 		
+		return "redirect:/main";
 		//return "main";
 	}
 

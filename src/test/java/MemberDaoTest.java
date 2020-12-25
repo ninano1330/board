@@ -1,7 +1,8 @@
-package com.jeon.board.dao;
-
 import javax.sql.DataSource;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
@@ -10,12 +11,17 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.jeon.board.config.ApplicationConfig;
 import com.jeon.board.dto.MemberDto;
 
-
 @Repository
-public class MemberDao {
+@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations="classpath:config/springbeans.xml")
+@ContextConfiguration(classes ={ApplicationConfig.class})
+public class MemberDaoTest {
 	@Autowired
 	private DataSource dataSource;
 	
@@ -28,23 +34,28 @@ public class MemberDao {
 	//camel 표기법과 table column 자동 매핑
 	RowMapper<MemberDto> rowMapper = BeanPropertyRowMapper.newInstance(MemberDto.class);
 	
-	public MemberDao(DataSource dataSource) {
+//	public MemberDaoTest(DataSource dataSource) {
+//		namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+//		simpleJdbcIntsert = new SimpleJdbcInsert(dataSource);
+//	}
+	
+	@Before
+	public void setBeans() throws Exception{
 		namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 		simpleJdbcIntsert = new SimpleJdbcInsert(dataSource)
-				.withTableName("MEMBER")   // 테이블 명
-				.usingGeneratedKeyColumns("MEMBER_NO"); // 자동증가값
+							.withTableName("MEMBER")   // 테이블 명
+							.usingGeneratedKeyColumns("MEMBER_NO"); // 자동증가값
 	}
 	
-	public int insertMember(MemberDto memberDto) {
-		SqlParameterSource params = new BeanPropertySqlParameterSource(memberDto);
+	@Test
+	public void insertMember() {
+		MemberDto memberDto = new MemberDto();
+		memberDto.setMemberId("ADMIN");
+		memberDto.setMemberPw("ADMIN");
+		memberDto.setMemberName("전민규");
 		
-		try {
-			return simpleJdbcIntsert.executeAndReturnKey(params).intValue();
-		}catch( org.springframework.dao.DuplicateKeyException e){
-			return 0;
-		}catch (Exception e) {
-			return -1;
-		}
+		SqlParameterSource params = new BeanPropertySqlParameterSource(memberDto);
+		System.out.println(simpleJdbcIntsert.executeAndReturnKey(params).intValue());
 	}
 	
 	public String updateMember(MemberDto memberDto) {

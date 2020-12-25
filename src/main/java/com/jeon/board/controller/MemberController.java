@@ -39,14 +39,22 @@ public class MemberController {
 	//  POST /members
 	@PostMapping(value="/members/join")
 	public String memberJoin(@Valid MemberDto memberDto, Errors error, String emailDomain) {
-		
 		if(error.hasErrors()) {
 			return "member/joinForm";
 		}
 		//System.out.println(memberDto);
 		//System.out.println(emailDomain);
 		
-		return "main";
+		int insertMemberCode = memberSerive.insertMember(memberDto);
+		if(insertMemberCode > 0) {
+			return "redirect:/main";
+		}else if(insertMemberCode ==0){
+			
+		}else {
+			//에러페이지
+		}
+		
+		return "";
 	}
 	
 	
