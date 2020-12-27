@@ -1,16 +1,20 @@
 package com.jeon.board.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jeon.board.dto.MemberDto;
 import com.jeon.board.service.MemberService;
 
@@ -38,9 +42,34 @@ public class MemberController {
 	// Create
 	//  POST /members
 	@PostMapping(value="/members/join")
-	public String memberJoin(@Valid MemberDto memberDto, Errors error, String emailDomain) {
-		if(error.hasErrors()) {
-			return "member/joinForm";
+	@ResponseBody
+	public String memberJoin(@Valid MemberDto memberDto, Errors errors, String emailDomain) {
+		if(errors.hasErrors()) {
+			/*
+			 * org.springframework.validation.BeanPropertyBindingResult: 1 errors
+				Error in object 'memberDto': codes [existMemberId.memberDto,existMemberId]; arguments []; default message [null]
+			*/
+			
+			List<FieldError> fieldErrorArr = errors.getFieldErrors();
+			for(FieldError fieldError : fieldErrorArr) {
+				
+			}
+			
+			ObjectMapper mapper = new ObjectMapper();
+			
+			System.out.println(errors.getObjectName());
+			System.out.println("test : " + errors.getFieldValue("memberId"));
+			System.out.println("test2 : " + errors.getFieldError("memberId"));
+			System.out.println(errors.getFieldType("memberId"));
+
+//			System.out.println(errors.getFieldError());
+//			System.out.println(errors.getFieldError("codes"));
+//			System.out.println(errors.getErrorCount());
+//			System.out.println(errors.getFieldErrorCount());
+//			System.out.println(errors.hashCode());
+//			System.out.println(errors.getFieldValue("codes"));
+
+			return errors.toString();
 		}
 		//System.out.println(memberDto);
 		//System.out.println(emailDomain);

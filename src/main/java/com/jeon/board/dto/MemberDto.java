@@ -2,11 +2,21 @@ package com.jeon.board.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class MemberDto {
 	private int memberNo;
+	
+	@NotBlank(message = "아이디를 입력해주세요.")
 	private String memberId;
+	
+	@NotNull(message = "비밀번호를 입력해주세요.")
 	private String memberPw;
+	
+	@NotBlank(message = "이름을 입력해주세요.")
 	private String memberName;
+	
 	private Date memberJoinDate;
 	private int memberGrade;
 	private String memberPhone;

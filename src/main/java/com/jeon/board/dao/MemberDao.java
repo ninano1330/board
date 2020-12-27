@@ -1,5 +1,7 @@
 package com.jeon.board.dao;
 
+import java.util.Collections;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +59,11 @@ public class MemberDao {
 	
 	public String selectMember(MemberDto memberDto) {
 		return "";
+	}
+	
+	public int selectMemberbyId(String memberId) {
+		String sql = "SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ID = :memberId";
+		return namedParameterJdbcTemplate.queryForObject(sql, Collections.singletonMap("memberId", memberId), Integer.class);
 	}
 	
 	//@Transactional

@@ -12,13 +12,13 @@ import com.jeon.board.dto.MemberDto;
 @Service
 public class MemberService {
 	@Autowired
-	MemberDao MemberDao;
+	MemberDao memberDao;
 	
 	public int insertMember(MemberDto memberDto) {
 		memberDto.setMemberGrade(1);
 		memberDto.setMemberJoinDate(new Date());
 		
-		return MemberDao.insertMember(memberDto);
+		return memberDao.insertMember(memberDto);
 	}
 	
 	public String updateMember(MemberDto memberDto) {
@@ -32,7 +32,12 @@ public class MemberService {
 	public String selectMember(MemberDto memberDto) {
 		return "";
 	}
-	public boolean checkid(String memberid) {
-		return true;
+	
+	public boolean chkDupMemberId(String memberId) {
+		if(memberDao.selectMemberbyId(memberId) == 1) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 }

@@ -25,7 +25,7 @@ public class Test {
 //		System.out.println(conn);
 		
 		
-		LoginDao loginDao = new LoginDao(ds);
+//		LoginDao loginDao = new LoginDao(ds);
 //		MemberDto memberDto = new MemberDto();
 //		
 //		memberDto.setMemberId("ADMIN");
@@ -40,13 +40,13 @@ public class Test {
 //		System.out.println(result.getMemberPw());
 		
 		
-		LoginService loginService = ac.getBean(LoginService.class);
+//		LoginService loginService = ac.getBean(LoginService.class);
 //		System.out.println(loginService);
 //		System.out.println(loginService.getLogindao());
 		
 		
 		
-		BoardDto boardDto = new BoardDto();
+//		BoardDto boardDto = new BoardDto();
 //		System.out.println(boardDto.getBoardNo());
 		
 		MemberDto memberDto = new MemberDto();
@@ -55,8 +55,9 @@ public class Test {
 		memberDto.setMemberName("전민규");
 		
 		MemberDao memberDao = new MemberDao(ds);
-		System.out.println(memberDao.insertMember(memberDto));
+		//System.out.println(memberDao.insertMember(memberDto));
 		
+		System.out.println(memberDao.selectMemberbyId("ADMIN"));
 		
 	}
 
